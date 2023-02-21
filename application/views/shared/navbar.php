@@ -18,7 +18,7 @@
                         <a class="nav-link btn btn-success ms-2 px-3 btn-sm"
                             href="<?= base_url('auth/logout') ?>">Logout</a>
                     <?php else: ?>
-                        <a class="nav-link btn btn-success ms-2 px-3 btn-sm" href="<?= base_url('login') ?>">Login</a>
+                        <a class="nav-link btn btn-primary ms-2 px-3 btn-sm" href="<?= base_url('login') ?>">Login</a>
                     <?php endif; ?>
                 </li>
             </ul>

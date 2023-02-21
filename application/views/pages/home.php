@@ -4,7 +4,9 @@
             <?php foreach ($posts as $post) { ?>
                 <div class="col-md-12 mb-4">
                     <div class="card">
-                        <img style="width: 100%; height: 350px;" src="<?php echo base_url('/public/images/'.$post->image); ?>" class="card-img-top" alt="<?php echo $post->title; ?>">
+                        <img style="width: 100%; height: 350px;"
+                            src="<?php echo base_url('/public/images/' . $post->image); ?>" class="card-img-top"
+                            alt="<?php echo $post->title; ?>">
                         <div class="card-body">
                             <h5 class="card-title">
                                 <?php echo $post->title; ?>
@@ -25,7 +27,7 @@
         </div>
 
     </div>
-</div>
-
-</div>
+    <div class="col-md-4">
+        <?php include(APPPATH . 'views/shared/sidebar.php'); ?>
+    </div>
 </div>

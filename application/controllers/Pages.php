@@ -8,6 +8,7 @@ class Pages extends CI_Controller
         parent::__construct();
         $this->load->model('User_model');
         $this->load->model('BlogPost_model');
+        $this->load->model('Category_model');
         $this->load->helper(['url', 'form']);
         $this->load->library(['form_validation', 'session']);
     }
@@ -17,6 +18,7 @@ class Pages extends CI_Controller
         $data['title'] = 'Home Page';
         $posts = $this->BlogPost_model->get_posts();
         $data['posts'] = $posts; 
+        $data['categories'] = $this->Category_model->get_categories();
 
         $this->load->view('header', $data);
         $this->load->view('pages/home', $data);
