@@ -9,18 +9,19 @@ class Posts extends CI_Controller
         $this->load->helper(['url']);
         $this->load->library(['form_validation', 'session']);
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
-
-        if (!$this->session->userdata('user_id')) {
-            redirect('login');
-        }
     }
-    
-    public function index($param) {
+
+    public function index($param)
+    {
         echo $param;
     }
 
     public function create()
     {
+        if (!$this->session->userdata('user_id')) {
+            redirect('login');
+        }
+
         $data['title'] = 'Create post';
 
         $this->load->view('header', $data);
@@ -30,6 +31,10 @@ class Posts extends CI_Controller
 
     public function store()
     {
+        if (!$this->session->userdata('user_id')) {
+            redirect('login');
+        }
+
         $this->form_validation->set_rules('title', 'Title', 'required');
         $this->form_validation->set_rules('content', 'Content', 'required');
 
@@ -37,11 +42,11 @@ class Posts extends CI_Controller
             $this->session->set_flashdata('validation_errors', validation_errors());
             redirect(base_url('posts/create'));
         } else {
-            $config['upload_path'] = APPPATH.'../public/images/';
-            $config['allowed_types'] = 'gif|jpg|png';
+            $config['upload_path'] = APPPATH . '../public/images/';
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
             $this->load->library('upload', $config);
 
-            if(!$this->upload->do_upload('image')) {
+            if (!$this->upload->do_upload('image')) {
                 $errors = $this->upload->display_errors();
                 $this->session->set_flashdata('validation_errors', $errors);
                 redirect('posts/create');
@@ -54,8 +59,20 @@ class Posts extends CI_Controller
                 $this->BlogPost_model->create($data);
 
                 $this->session->set_flashdata('success', 'Your post has been created');
-                redirect('posts/create'); 
+                redirect('posts/create');
             }
         }
+    }
+
+    public function show($id)
+    {
+        $post = $this->BlogPost_model->get_post($id);
+
+        $data['title'] = $post->title;
+        $data['post'] = $post;
+
+        $this->load->view('header', $data);
+        $this->load->view('pages/posts/show', $data);
+        $this->load->view('footer');
     }
 }

@@ -12,7 +12,7 @@
                             <p class="card-text">
                                 <?php echo substr($post->content, 0, 100); ?>...
                             </p>
-                            <a href="<?php echo base_url('blog/post/' . $post->id); ?>" class="btn btn-primary">Read
+                            <a href="<?php echo base_url('posts/show/' . $post->id); ?>" class="btn btn-primary">Read
                                 More</a>
                         </div>
                         <div class="card-footer text-muted">

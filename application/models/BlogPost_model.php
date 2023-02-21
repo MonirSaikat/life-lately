@@ -18,6 +18,10 @@ class BlogPost_model extends CI_Model
         return $query->result();
     }
 
+    public function get_post($id) {
+        return $this->db->get_where('blog_post', 'id='.$id)->first_row();
+    }
+
     public function create($data) {
         $this->db->insert('blog_post', $data); 
         return $this->db->insert_id();
